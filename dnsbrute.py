@@ -1,4 +1,4 @@
-# dnsbrute 1.0.0
+# dnsbrute 1.0.2
 # por Gabs77u
 # 2023-07-20
 
@@ -12,20 +12,26 @@ import os
 import argparse
 
 from requests import get, head
+from concurrent.futures import ThreadPoolExecutor
 
 def validate_url(url):
     try:
-        return requests.head(url).status_code == 200
-    except requests.exceptions.ConnectionError:
+        parsed_url = urlparse(url)
+        return parsed_url.scheme and parsed_url.netloc and parsed_url.path
+    except ValueError:
         return False
 
 
-def validate_wordlist(wordlist):
-    return os.path.isfile(wordlist)
-
-
 def validate_word(word):
-    return re.match(r"\w+", word)
+    return re.match(r"\w+", word) is not None
+
+
+def validate_directory(url, word):
+    try:
+        response = requests.head(f"{url}/{word}")
+        return response.status_code == 200 and response.headers["Content-Type"].startswith("text/html")
+    except requests.exceptions.ConnectionError:
+        return False
 
 
 class Bruteforcer:
@@ -35,17 +41,27 @@ class Bruteforcer:
 
     def run(self):
         count = 0
+        table = []
 
-        for word in self.wordlist:
-            if requests.get(f"{self.url}/{word}").status_code == 200:
-                logging.info(
-                    f"Diretório encontrado: {self.url}/{word}, data e hora: {datetime.now()}"
-                )
-                return
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = [
+                executor.submit(validate_directory, self.url, word)
+                for word in self.wordlist
+                if validate_word(word)
+            ]
 
-            count += 1
+            for future in futures:
+                result = future.result()
+                if result:
+                    table.append([word, "Diretório encontrado"])
+                    return table
+                else:
+                    table.append([word, "Diretório não encontrado"])
 
-        logging.info(f"Foram verificadas {count} palavras e foram encontrados {count} diretórios.")
+            count = len(self.wordlist)
+
+        logging.info(f"Foram verificadas {count} palavras e foram encontrados {len(table)} diretórios.")
+        return table
 
 
 def main():
@@ -84,13 +100,20 @@ def main():
                 print("Por favor, insira uma URL válida.")
                 continue
 
-            if not validate_wordlist(args.wordlist):
+            if not os.path.isfile(args.wordlist):
                 print("O arquivo de lista de palavras não existe.")
                 continue
 
             # Inicia o ataque de força bruta
             bruteforcer = Bruteforcer(args.url, args.wordlist)
-            bruteforcer.run()
+            table = bruteforcer.run()
+
+            # Exibe os resultados do ataque
+            print("-" * 80)
+            print("Resultados:")
+            for word, status in table:
+                print(f"{word:<20} {status:>20}")
+            print("-" * 80)
 
             break
         elif choice == "n":
@@ -101,3 +124,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Alterações feitas nas versões:
+
+# Versão 1.0.2:
+# * Corrigi erros de sintaxe, lógica e bugs.
+# * Adicionei verificações para garantir que a URL e a palavra sejam válidas.
+# * Paralelizei o ataque usando uma thread pool.
