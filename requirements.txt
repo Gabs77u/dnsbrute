@@ -19,4 +19,10 @@ tabulate>=0.9.0
 rich>=13.6.0
 
 # Gerenciamento de threads
-futures>=3.0.5 
+futures>=3.0.5
+
+# Novas dependências
+jinja2>=3.1.2
+statistics>=1.0.3.5
+psutil>=5.9.6
+pyyaml>=6.0.1 

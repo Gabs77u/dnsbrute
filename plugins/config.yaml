@@ -1,0 +1,53 @@
+# Configuração do plugin de relatórios
+
+reports:
+  max_reports: 100
+  max_dir_size_mb: 500
+  max_age_days: 30
+  compression_threshold_mb: 1
+  buffer_size: 8192
+  max_write_queue: 1000
+  write_batch_size: 10
+  write_interval_seconds: 5
+
+formats:
+  enabled:
+    - json
+    - html
+    - csv
+  default: json
+  compression: true
+
+profiles:
+  minimal:
+    metrics:
+      - total_requests
+      - found_count
+      - errors
+    formats:
+      - json
+  
+  standard:
+    metrics:
+      - total_requests
+      - found_count
+      - errors
+      - response_times
+      - status_codes
+    formats:
+      - json
+      - html
+  
+  complete:
+    metrics:
+      - "*"  # Todas as métricas
+    formats:
+      - "*"  # Todos os formatos
+
+validation:
+  max_target_length: 2048
+  allowed_schemes:
+    - http
+    - https
+  allowed_status_codes: !python/range [100, 600]
+  max_content_type_length: 256 
