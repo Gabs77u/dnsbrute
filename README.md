@@ -5,7 +5,10 @@
 
 Uma ferramenta avançada para enumeração de subdomínios e diretórios, com recursos de relatórios detalhados e análise de resultados.
 
-## 🚀 Novos Recursos (v2.1.0)
+![DNS2](https://github.com/user-attachments/assets/ac2d17e6-bf2e-4ce6-ab65-e3b743676efc)
+![DNS1](https://github.com/user-attachments/assets/0ad46672-a5cd-4696-92be-e65fe01ee1b0)
+
+## 🚀 Novos Recursos (v2.2.0)
 
 - Sistema de plugins extensível
 - Relatórios detalhados em múltiplos formatos
@@ -204,8 +207,8 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ## 📬 Contato
 
 - Autor: Gabs77u
-- GitHub: [@seu-usuario](https://github.com/seu-usuario)
-- Email: seu-email@example.com
+- GitHub: [Gabs77u](https://github.com/Gabs77u)
+- Email: gabrielaraujoseven@gmail.com
 
 ## 🙏 Agradecimentos
 
