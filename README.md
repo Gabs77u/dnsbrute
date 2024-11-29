@@ -6,6 +6,8 @@
 
 </div>
 
+![DNS1](https://github.com/user-attachments/assets/858ed355-581a-4d70-864e-4a9dd2317e47)
+
 > DNSBrute é uma ferramenta avançada de descoberta de diretórios e subdomínios em aplicações web através de ataques de força bruta.
 
 ## 📋 Índice
@@ -194,9 +196,5 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - Github: [@gabs77u](https://github.com/gabs77u)
 
 ---
-
-<div align="center">
-
 Desenvolvido por Gabs77u
 
-</div>
