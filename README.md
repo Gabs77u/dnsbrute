@@ -1,7 +1,5 @@
 # DNSBrute v2.1.0
 
-<div align="center">
-
 [![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-2.1.0-red.svg)](https://github.com/gabs77u/dnsbrute)
