@@ -1,0 +1,22 @@
+# Dependências principais
+requests>=2.31.0
+urllib3>=2.0.7
+
+# Formatação e logging
+colorama>=0.4.6
+tqdm>=4.66.1
+
+# Utilitários
+python-dateutil>=2.8.2
+validators>=0.22.0
+
+# Segurança
+cryptography>=41.0.5
+certifi>=2023.7.22
+
+# Formatação de saída
+tabulate>=0.9.0
+rich>=13.6.0
+
+# Gerenciamento de threads
+futures>=3.0.5 
